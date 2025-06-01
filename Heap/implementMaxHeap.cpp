@@ -35,6 +35,48 @@ class MaxHeap{
     }
 
 
+    void Heapify(int index){
+
+        int left  = 2 * index + 1;
+        int right = 2 * index + 2;
+
+        int maxi = index;
+
+        if(left < size && arr[left] > maxi){
+            maxi = left;
+        }
+
+        if(right < size && arr[right] > maxi){
+            maxi = right;
+        }
+
+        if(maxi != index){
+            swap(arr[index], arr[maxi]);
+            Heapify(maxi);
+        }
+    }
+
+
+    // Delete
+    void remove(){
+
+        if(size == 0){
+            cout<<"There is no element in heap to delete!!";
+            return;
+        }
+
+        swap(arr[0], arr[size-1]);
+        size--;
+
+        if(size == 0){
+            return;
+        }
+
+        Heapify(0);
+
+    }
+
+
     // print heap elements
     void print(){
         for(int i = 0; i < size; i++){
@@ -57,5 +99,7 @@ int main(){
 
     h->print();
 
+    h->remove();
+    h->print();
     return 0;
 }
